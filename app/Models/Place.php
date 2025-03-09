@@ -14,13 +14,14 @@ class Place extends Model
         'name',
         'latitude',
         'longitude',
-        'panorama_id',
+        'panoid',
         'pov',
         'type',
         'level',
         'hints',
         'created_by',
-        'active'
+        'active',
+        'has_image'
     ];
 
     protected function casts(): array
@@ -28,7 +29,8 @@ class Place extends Model
         return [
             'pov' => 'array',
             'hints' => 'array',
-            'active' => 'boolean'
+            'active' => 'boolean',
+            'has_image' => 'boolean'
         ];
     }
 

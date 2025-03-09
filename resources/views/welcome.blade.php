@@ -11,7 +11,6 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="antialiased font-sans">
-        {{-- @livewire('street-view', ['locationId' => 1]) --}}
-        @livewire('create-location')
+        GUESSCITY
     </body>
 </html>
