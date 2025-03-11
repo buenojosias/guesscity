@@ -1,27 +1,62 @@
 <div class="mx-auto my-32 w-2/3 h-2/3 bg-white">
-    <x-ts-button wire:click="$dispatchSelf('render-map')" text="Carregar mapa" />
-    <div id="map" class="w-full h-full">Carregar mapa</div>
+    <x-ts-button wire:click="$dispatch('load-map')" text="Carregar mapa" />
+    <x-ts-button wire:click="$dispatchSelf('get-place', {lat: -25.4290661, lng: -49.3063484})"
+        text="Carregar outro local" />
+    <x-ts-button wire:click="$dispatchSelf('center-map')" text="Centralizar mapa" />
+    <div wire:ignore id="map" class="w-full h-full">Carregar mapa</div>
 </div>
 @script
     <script>
+        let map;
+
+        // Variáveis para armazenar os marcadores e a linha
+        var placeMarker = null;
+        var clickMarker = null;
+        var line = null;
+
+        // Coordenadas da posição inicial
+        initialPosition = {
+            lat: {{ $initialPosition['lat'] }},
+            lng: {{ $initialPosition['lng'] }}
+        };
+
         $wire.on('render-map', () => {
-            console.log('Carregar Street View');
-            initMap();
+            console.log('Renderizar mapa');
+            setTimeout(() => {
+                initializeMap();
+            }, 100);
         });
 
-        function initMap() {
-            // Coordenadas da posição inicial
-            var initialPosition = {
-                lat: -25.4322,
-                lng: -49.2811
+        $wire.on('set-place', ({
+            lat,
+            lng
+        }) => {
+            placeCoords = {
+                lat: lat,
+                lng: lng
             };
+            if (placeMarker) placeMarker.setMap(null);
+            if (clickMarker) clickMarker.setMap(null);
+            if (line) line.setMap(null);
 
-            // Coordenadas do local
-            var placeCoords = {
-                lat: -25.4426,
-                lng: -49.3438
-            };
+            console.log('Local definido:', placeCoords);
+            centerMap();
+        });
 
+        $wire.on('center-map', () => {
+            console.log('Centralizar mapa');
+            centerMap();
+        });
+
+        function centerMap() {
+            if (map) { // Verifica se o objeto map foi criado
+                map.setCenter(initialPosition);
+            } else {
+                console.error("Mapa não foi inicializado corretamente.");
+            }
+        }
+
+        function initializeMap() {
             // Opções do mapa
             var options = {
                 zoom: 14, // Nível de zoom
@@ -41,7 +76,7 @@
             };
 
             // Cria o mapa no elemento div com id "map"
-            var map = new google.maps.Map(document.getElementById('map'), options);
+            map = new google.maps.Map(document.getElementById('map'), options);
 
             // Personaliza o cursor do mouse
             map.setOptions({
@@ -58,11 +93,6 @@
                 url: 'https://maps.google.com/mapfiles/kml/pal2/icon10.png', // Ícone personalizado (alvo)
                 scaledSize: new google.maps.Size(32, 32) // Tamanho do ícone
             };
-
-            // Variáveis para armazenar os marcadores e a linha
-            var placeMarker = null;
-            var clickMarker = null;
-            var linha = null;
 
             // Intercepta o clique do usuário no mapa
             map.addListener('click', function(event) {
@@ -81,25 +111,25 @@
                 // Remove marcadores e linha anteriores (se existirem)
                 if (placeMarker) placeMarker.setMap(null);
                 if (clickMarker) clickMarker.setMap(null);
-                if (linha) linha.setMap(null);
+                if (line) line.setMap(null);
 
                 // Adiciona marcadores no mapa com ícones personalizados
                 placeMarker = new google.maps.Marker({
                     position: placeCoords,
                     map: map,
-                    icon: placeIcon, // Ícone personalizado
+                    // icon: placeIcon, // Ícone personalizado
                     title: 'Local correto'
                 });
 
                 clickMarker = new google.maps.Marker({
                     position: clickCoords,
                     map: map,
-                    icon: clickIcon, // Ícone personalizado
+                    // icon: clickIcon, // Ícone personalizado
                     title: 'Local clicado'
                 });
 
                 // Traça uma linha entre os dois pontos
-                linha = new google.maps.Polyline({
+                line = new google.maps.Polyline({
                     path: [placeCoords, clickCoords],
                     geodesic: true,
                     strokeColor: '#FF0000',

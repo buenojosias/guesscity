@@ -20,9 +20,10 @@
         <x-ts-icon name="user" class="h-5 w-5" />
     </header>
 
-    @livewire('player.map')
+    @livewire('player.map-alternative')
 
-    {{-- <footer class="fixed bottom-8 w-full pl-3 pr-16">
+    <footer class="fixed bottom-8 w-full pl-3 pr-16">
+        {{-- @livewire('player.map') --}}
         <div class="absolute right-0">
             asdf
         </div>
@@ -34,7 +35,7 @@
                 <x-ts-button wire:click="$dispatch('load-street-view')" text="Responder" />
             </div>
         </div>
-    </footer> --}}
+    </footer>
 
     {{-- <div class="footer absolute bottom-8 p-4 z-50 rounded-lg w-full flex justify-center bg-gray-800/90">
         <button wire:click="$dispatch('load-street-view')">Carregar Street View</button>

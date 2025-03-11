@@ -1,4 +1,4 @@
-<div class="h-full w-full">
+<div class="h-full w-full z-0 fixed top-0 left-0 bg-gray-900/95">
     <div class="w-1/2">
         @if ($showStreetView)
             <div id="street-view" style="width: 50%; height: 500px;"></div>
