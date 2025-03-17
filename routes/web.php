@@ -4,7 +4,7 @@ use App\Http\Middleware\AdminMiddleware;
 use App\Livewire\Admin\Dashboard;
 use App\Livewire\Admin\Place\CreatePlace;
 use App\Livewire\Admin\Place\ListPlace;
-use App\Livewire\Player;
+use App\Livewire\Game;
 use Illuminate\Support\Facades\Route;
 
 // Route::get('/', ['App\Http\Controllers\HomeController', 'index']);
@@ -12,7 +12,7 @@ Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 
-Route::get('player', Player::class)->name('player');
+Route::get('game', Game::class)->name('game');
 
 Route::prefix('admin')->name('admin.')->middleware(['auth', AdminMiddleware::class])->group(function () {
     Route::get('/', Dashboard::class)->name('dashboard');

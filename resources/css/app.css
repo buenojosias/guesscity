@@ -1,3 +1,28 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+    background-image: url('../../public/images/background-3.webp');
+    background-size: cover;
+    background-position: center;
+    @apply h-screen w-screen font-sans antialiased;
+}
+
+.inselectable {
+    @apply select-none cursor-default;
+}
+
+.game {
+    @apply relative h-screen w-full bg-slate-900/90;
+}
+
+#lock-rotation {
+    @apply w-full h-full fixed bg-transparent z-50;
+}
+
+.gm-style a[href^="https://maps.google.com/maps"], header {
+    /* display: none !important; Esconde o link */
+    pointer-events: none !important;  /* Desativa o clique */
+    cursor: default !important;
+}

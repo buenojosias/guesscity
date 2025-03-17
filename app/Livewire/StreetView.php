@@ -13,7 +13,7 @@ class StreetView extends Component
     public $panoramaId;
     public $apiKey;
 
-    public function mount($locationId)
+    public function mount($locationId = 1)
     {
         $this->loadPanorama($locationId);
         $this->apiKey = config('services.google_maps.key');
@@ -40,7 +40,7 @@ class StreetView extends Component
     private function fetchPanoramaIdFromDatabase()
     {
         // Simulação: Busca do panorama no banco de dados
-        return \DB::table('locations')->where('id', $this->locationId)->value('panorama_id');
+        return \DB::table('places')->where('id', $this->locationId)->value('panorama_id');
     }
 
     public function render()

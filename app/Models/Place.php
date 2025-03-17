@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Enums\PlaceLevelEnum;
+use App\Enums\PlaceTypeEnum;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -30,7 +32,9 @@ class Place extends Model
             'pov' => 'array',
             'hints' => 'array',
             'active' => 'boolean',
-            'has_image' => 'boolean'
+            'has_image' => 'boolean',
+            'type' => PlaceTypeEnum::class,
+            'level' => PlaceLevelEnum::class,
         ];
     }
 
