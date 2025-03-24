@@ -1,4 +1,4 @@
-<div class="game"  x-data="{ playing: @entangle('isPlaying') }">
+<div class="game" x-data="{ playing: @entangle('isPlaying') }">
     <div x-show="playing">
         @livewire('game.street-view')
     </div>
@@ -31,15 +31,14 @@
     {{-- @endif --}}
 
     {{-- @if ($isPlaying) --}}
-        <footer x-show="playing" class="fixed bottom-2 w-full pl-0 pr-0">
-            @livewire('game.map')
-            <div class="footer-wrapper px-0 flex justify-between items-center">
+        <footer x-show="playing" class="game-footer">
+            <div class="footer-wrapper">
                 <div class="w-60">menu esquerdo</div>
                 <div class="w-[728px] h-[90px] text-white bg-black-900/95 rounded">
                     <img src="{{ asset('images/ads.png') }}" alt="">
                 </div>
                 <div class="w-60">
-                    <x-ts-button wire:click="$dispatch('change-location')" text="Novo Local" />
+                    @livewire('game.map')
                 </div>
             </div>
         </footer>

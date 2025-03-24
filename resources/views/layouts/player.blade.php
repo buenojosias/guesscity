@@ -8,11 +8,14 @@
     <title>{{ config('app.name', 'GuessCity') }}</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Gemunu+Libre:wght@200..800&display=swap" rel="stylesheet">    @livewireStyles
+    <link href="https://fonts.googleapis.com/css2?family=Gemunu+Libre:wght@200..800&display=swap" rel="stylesheet">
+    <tallstackui:script />
+    @livewireStyles
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <script src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAPS_API_KEY') }}" async defer></script>
 </head>
-<body class="">
+
+<body class="player">
     {{ $slot }}
     @livewireScripts
 </body>

@@ -13,6 +13,7 @@ class Map extends Component
     public $initialPosition;
     public $place;
     public $clicked;
+    public $distance;
 
     public function mount($lat = -25.4322, $lng = -49.2811)
     {
@@ -34,10 +35,9 @@ class Map extends Component
     }
 
     #[On('set-clicked')]
-    public function setClicked($coords)
+    public function setClicked($coords = null)
     {
         $this->clicked = $coords;
-        $this->calculateDistance();
     }
 
     public function calculateDistance()
@@ -50,6 +50,14 @@ class Map extends Component
             $this->distance = $dist * 60 * 1.1515 * 1.609344;
         }
         $this->dispatch('draw-line', place: $this->place, clicked: $this->clicked, distance: $this->distance)->self();
+    }
+
+    public function newGame()
+    {
+        $this->dispatch('toggle-loading', true)->to('game.street-view');
+        $this->reset(['place', 'clicked', 'distance']);
+        $this->dispatch('reset-map')->self();
+        $this->dispatch('get-place')->to('game');
     }
 
     public function render()

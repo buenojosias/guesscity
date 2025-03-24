@@ -14,6 +14,8 @@
 </head>
 
 <body class="font-sans antialiased">
+    <x-ts-dialog />
+    <x-ts-toast />
     <x-ts-layout>
         <x-slot:header>
             <x-ts-layout.header>

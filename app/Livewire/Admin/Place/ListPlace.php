@@ -4,9 +4,12 @@ namespace App\Livewire\Admin\Place;
 
 use App\Models\Place;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class ListPlace extends Component
 {
+    use WithPagination;
+
     public $rows = [];
     public $headers = [];
 
@@ -15,12 +18,23 @@ class ListPlace extends Component
         $this->headers = [
             ['index' => 'name', 'label' => 'Nome'],
             ['index' => 'type', 'label' => 'Tipo'],
-            ['index' => 'city_id', 'label' => 'Cidade'],
+            ['index' => 'city', 'label' => 'Cidade'],
             ['index' => 'latitude', 'label' => 'Latitude'],
             ['index' => 'longitude', 'label' => 'Longitude'],
         ];
 
-        $this->rows = Place::all()->toArray();
+        $this->rows = Place::with('city')->get();
+
+        $this->rows = $this->rows->map(function ($row) {
+            return [
+                'id' => $row->id,
+                'name' => $row->name,
+                'city' => $row->city->name,
+                'latitude' => $row->latitude,
+                'longitude' => $row->longitude,
+                'type' => $row->type->label(),
+            ];
+        });
     }
 
     public function render()

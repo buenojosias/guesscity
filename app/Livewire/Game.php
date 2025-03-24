@@ -43,6 +43,7 @@ class Game extends Component
     #[On('get-place')]
     public function getPlace()
     {
+        // $this->dispatch('toggle-loading', true)->to('game.street-view');
         $this->getRandomPlace();
         // $this->dispatch('updateStreetViewLocation', latitude: (float) $this->latitude, longitude: (float) $this->longitude, heading: $this->pov['heading']);
     }

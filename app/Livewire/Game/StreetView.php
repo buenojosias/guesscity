@@ -8,10 +8,10 @@ use Livewire\Component;
 
 class StreetView extends Component
 {
-    public $showStreetView = true;
     public $latitude;
     public $longitude;
     public $pov;
+    public $loading = true;
 
     public function mount()
     {
@@ -29,18 +29,11 @@ class StreetView extends Component
         $this->dispatch('updateStreetViewLocation', latitude: (float) $this->latitude, longitude: (float) $this->longitude, heading: $this->pov['heading']);
     }
 
-    // public function getRandomPlace()
-    // {
-    //     $place = Place::inRandomOrder()->first();
-
-    //     if ($place) {
-    //         $this->latitude = $place->latitude;
-    //         $this->longitude = $place->longitude;
-    //         $this->pov = $place->pov;
-    //     } else {
-    //         dd('No places found');
-    //     }
-    // }
+    #[On('toggle-loading')]
+    public function toggleLoading($state)
+    {
+        $this->loading = $state;
+    }
 
     // #[On('load-street-view')]
     // public function loadStreetView()

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Enums\PlaceLevelEnum;
 use App\Enums\PlaceTypeEnum;
+use Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -14,6 +15,7 @@ class Place extends Model
     protected $fillable = [
         'city_id',
         'name',
+        'neighborhood',
         'latitude',
         'longitude',
         'panoid',
@@ -23,7 +25,6 @@ class Place extends Model
         'hints',
         'created_by',
         'active',
-        'has_image'
     ];
 
     protected function casts(): array
@@ -32,7 +33,6 @@ class Place extends Model
             'pov' => 'array',
             'hints' => 'array',
             'active' => 'boolean',
-            'has_image' => 'boolean',
             'type' => PlaceTypeEnum::class,
             'level' => PlaceLevelEnum::class,
         ];

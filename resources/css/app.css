@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
+body.player {
     background-image: url('../../public/images/background-3.webp');
     background-size: cover;
     background-position: center;
@@ -17,6 +17,11 @@ body {
     @apply relative h-screen w-full bg-slate-900/90;
 }
 
+#map {
+    @apply w-full;
+    height: calc(100vh - 240px);
+}
+
 #lock-rotation {
     @apply w-full h-full fixed bg-transparent z-50;
 }
@@ -25,4 +30,11 @@ body {
     /* display: none !important; Esconde o link */
     pointer-events: none !important;  /* Desativa o clique */
     cursor: default !important;
+}
+
+footer.game-footer {
+    @apply fixed bottom-0 w-full pl-0 pr-0 bg-gray-900/90;
+}
+.footer-wrapper {
+    @apply px-0 flex justify-between items-center py-0.5;
 }

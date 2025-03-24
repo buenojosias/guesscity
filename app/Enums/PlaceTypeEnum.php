@@ -17,7 +17,7 @@ enum PlaceTypeEnum: string
     {
         return match($this) {
             self::ROAD => 'Rua',
-            self::CORNER => 'Esquina',
+            self::CORNER => 'Cruzamento',
             self::SQUARE => 'Praça',
             self::PARK => 'Parque',
             self::TOURIST => 'Ponto turístico',
