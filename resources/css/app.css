@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 body.player {
-    background-image: url('../../public/images/background-3.webp');
+    background-image: url('../../public/images/background.webp');
     background-size: cover;
     background-position: center;
     @apply h-screen w-screen font-sans antialiased;

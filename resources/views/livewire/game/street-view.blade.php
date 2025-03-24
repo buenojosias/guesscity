@@ -1,7 +1,7 @@
 <div class="fixed top-0 left-0 h-screen w-full" x-data="{ loading: @entangle('loading') }" x-cloack>
     <div class="fixed flex items-center justify-center w-full h-full z-10 bg-slate-900 text-gray-600 text-3xl"
         x-show="loading" x-transition:enter="transition-opacity duration-300">
-        <img src="{{ asset('images/location.gif') }}" alt="Carregando..." class="w-36 h-36"
+        <img src="{{ asset('images/loading.gif') }}" alt="Carregando..." class="w-36 h-36"
             style="filter: saturate(50%) opacity(0.2);">
     </div>
     <div id="street-view" class="fixed top-0 left-0 h-screen w-full" wire:ignore></div>
